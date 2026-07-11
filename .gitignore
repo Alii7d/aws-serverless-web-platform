@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.pyc
+
+# vs Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# environment variables
+.env
+
+# terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
