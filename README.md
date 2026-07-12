@@ -52,9 +52,9 @@ DynamoDB
 
 ## Unique Visitor tracking
 
-The original visitor counter increased every time the page was refreshed. Version 1.1 introduced a browser-generated UUID that is stored in the browser's `localStorage`. on every visit, the UUID is sent to lambda, where DynamoDB checks whether it has already been recorded. if the UUID exists, the current visitor count is returned without incrementing it. otherwise, the UUID is stored and the visitor count is increased by one.
+The original visitor counter increased every time the page was refreshed. Version 1.1 introduced a browser-generated UUID that is stored in the browser's `localStorage`. on every visit the UUID is sent to lambda, where DynamoDB checks whether it has already been recorded. if the UUID exists, the current visitor count is returned without incrementing it. otherwise, the UUID is stored and the visitor count is increased by one.
 
-The original design considered using client IP addresses with SHA-256 hashing to preserve visitor privacy. This approach was rejected because multiple users can share the same public IP address while a single user's IP address can change over time. A browser-generated UUID provides a more reliable approximation of unique visitors without storing IP addresses.
+The original design considered using IP addresses with SHA-256 hashing to preserve visitor privacy. this approach was rejected because multiple users can share the same public IP address. A browser-generated UUID provides a more reliable approximation of unique visitors without storing IP addresses.
 
 ## Run locally
 
