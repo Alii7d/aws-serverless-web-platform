@@ -42,13 +42,13 @@
 
 <div>
 <h3>Version</h3>
-<p>v1.1</p>
+<p>v1.2</p>
 </div>
 
 <div>
 <h3>Visitors</h3>
 <p id="visitor-count">Loading...</p>
-<p>(updates with every UNIQUE visit (based on browserid))</p>
+<p>(updates with every UNIQUE visit (based on UUID))</p>
 
 </div>
 
@@ -58,20 +58,22 @@
 
 <section id="architecture">
 
+    <section id="architecture">
+
     <h2>Request Flow</h2>
 
     <div class="flow">
 
         <div class="service">
             <h3>Browser</h3>
-            <p>user requests the website</p>
+            <p>user visits the website</p>
         </div>
 
         <div class="arrow">→</div>
 
         <div class="service">
             <h3>CloudFront</h3>
-            <p>delivers cached content globally</p>
+            <p>delivers cached website content</p>
         </div>
 
         <div class="arrow">→</div>
@@ -81,25 +83,38 @@
             <p>hosts the static website files</p>
         </div>
 
-        <div class="arrow">↓</div>
 
         <div class="service">
             <h3>API Gateway</h3>
-            <p>receives visitor count requests</p>
+            <p>routes API requests</p>
         </div>
 
-        <div class="arrow">←</div>
+        <div class="arrow">↓</div>
 
         <div class="service">
-            <h3>Lambda</h3>
-            <p>processes the API request</p>
+            <h3>VisitorCounter Lambda</h3>
+            <p>handles unique visitor requests</p>
         </div>
 
         <div class="arrow">←</div>
 
         <div class="service">
             <h3>DynamoDB</h3>
-            <p>stores and updates the visitor count</p>
+            <p>stores visitor count and UUIDs</p>
+        </div>
+
+        <div class="arrow">↲ </div>
+
+        <div class="service">
+            <h3>Contact Lambda</h3>
+            <p>processes contact form submissions</p>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="service">
+            <h3>Amazon SES</h3>
+            <p>sends contact form emails</p>
         </div>
 
     </div>
@@ -116,7 +131,7 @@
 
 <li>v1.1 - Unique IP Visitor Counter: finished (july 13, 2026)</li>
 
-<li>v1.2 - Contact API: unfinished</li>
+<li>v1.2 - Contact API: finished (july 14th, 2026)</li>
 
 <li>v1.3 - Cloudwatch Monitoring: unfinished</li>
 
@@ -134,39 +149,38 @@
 
 <section id="contact">
 
-<h2>Contact me</h2>
+    <h2>Contact</h2>
 
-<p>
-If you have any feedback or questions, don't hesitate to communicate with me below
-</p>
+    <form id="contact-form">
 
-<form id="contact-form">
+        <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            required
+        >
 
-<input
-type="text"
-id="name"
-placeholder="Your name"
-required>
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required
+        >
 
-<input
-type="email"
-id="email"
-placeholder="Email address"
-required>
+        <textarea
+            id="message"
+            placeholder="Message"
+            rows="6"
+            required
+        ></textarea>
 
-<textarea
-id="message"
-placeholder="Your message"
-rows="6"
-required></textarea>
+        <button type="submit">
+            Send Message
+        </button>
 
-<button type="submit">
-Send Message
-</button>
+    </form>
 
-<p id="form-status"></p>
-
-</form>
+    <p id="contact-status"></p>
 
 </section>
 
