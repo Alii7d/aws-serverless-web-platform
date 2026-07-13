@@ -10,6 +10,7 @@
 - Backend by AWS Lambda
 - Visitor counter stored in DynamoDB
 - Unique visitor tracking using browser-generated UUIDs
+- Contact form using API Gateway, Lambda, and Amazon SES
 - API built with API Gateway
 
 ## Architecture
@@ -22,10 +23,13 @@ CloudFront
 Private S3 Bucket
     |
 API Gateway
-    |
-AWS Lambda
-    |
-DynamoDB
+   / \
+  /   \
+Visitor Counter Lambda      Contact Lambda
+          |                      |
+      DynamoDB              Amazon SES
+                                   |
+                              Email Inbox
 ```
 
 ## Tech stack
@@ -38,6 +42,7 @@ DynamoDB
 - Amazon API Gateway
 - AWS Lambda
 - Amazon DynamoDB
+- Amazon SES
 - AWS IAM
 
 ## Roadmap
@@ -55,6 +60,10 @@ DynamoDB
 The original visitor counter increased every time the page was refreshed. Version 1.1 introduced a browser-generated UUID that is stored in the browser's `localStorage`. on every visit the UUID is sent to lambda, where DynamoDB checks whether it has already been recorded. if the UUID exists, the current visitor count is returned without incrementing it. otherwise, the UUID is stored and the visitor count is increased by one.
 
 The original design considered using IP addresses with SHA-256 hashing to preserve visitor privacy. this approach was rejected because multiple users can share the same public IP address. A browser-generated UUID provides a more reliable approximation of unique visitors without storing IP addresses.
+
+## Contact API
+
+Version 1.2 introduced a contact form that allows visitors to send messages directly from the website. the form validates user input before sending the message through API Gateway to lambda, where Amazon SES sends it directly to my email.
 
 ## Run locally
 
