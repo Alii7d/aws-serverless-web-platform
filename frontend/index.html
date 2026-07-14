@@ -42,7 +42,7 @@
 
 <div>
 <h3>Version</h3>
-<p>v1.2</p>
+<p>v1.3</p>
 </div>
 
 <div>
@@ -58,66 +58,72 @@
 
 <section id="architecture">
 
-    <section id="architecture">
+<h2>Architecture</h2>
 
-    <h2>Request Flow</h2>
+<div class="architecture-grid">
 
-    <div class="flow">
-
-        <div class="service">
-            <h3>Browser</h3>
-            <p>user visits the website</p>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="service">
-            <h3>CloudFront</h3>
-            <p>delivers cached website content</p>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="service">
-            <h3>S3</h3>
-            <p>hosts the static website files</p>
-        </div>
-
-
-        <div class="service">
-            <h3>API Gateway</h3>
-            <p>routes API requests</p>
-        </div>
-
-        <div class="arrow">↓</div>
-
-        <div class="service">
-            <h3>VisitorCounter Lambda</h3>
-            <p>handles unique visitor requests</p>
-        </div>
-
-        <div class="arrow">←</div>
-
-        <div class="service">
-            <h3>DynamoDB</h3>
-            <p>stores visitor count and UUIDs</p>
-        </div>
-
-        <div class="arrow">↲ </div>
-
-        <div class="service">
-            <h3>Contact Lambda</h3>
-            <p>processes contact form submissions</p>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="service">
-            <h3>Amazon SES</h3>
-            <p>sends contact form emails</p>
-        </div>
-
+    <div class="service browser">
+        <h3>Browser</h3>
+        <p>user requests the website</p>
     </div>
+
+    <div class="line vertical one"></div>
+
+    <div class="service cloudfront">
+        <h3>CloudFront</h3>
+        <p>delivers cached content globally</p>
+    </div>
+
+    <div class="line vertical two"></div>
+
+    <div class="service s3">
+        <h3>Private S3 Bucket</h3>
+        <p>hosts the static website files</p>
+    </div>
+
+    <div class="line vertical three"></div>
+
+    <div class="service gateway">
+        <h3>API Gateway</h3>
+        <p>handles api requests</p>
+    </div>
+
+    <div class="branch"></div>
+
+    <div class="service visitor">
+        <h3>Visitor Counter Lambda</h3>
+        <p>checks and updates unique visitors</p>
+    </div>
+
+    <div class="service contact">
+        <h3>Contact Lambda</h3>
+        <p>validates and sends messages</p>
+    </div>
+
+    <div class="line visitor-line"></div>
+
+    <div class="line contact-line"></div>
+
+    <div class="service dynamodb">
+        <h3>DynamoDB</h3>
+        <p>stores visitor data</p>
+    </div>
+
+    <div class="service ses">
+        <h3>Amazon SES</h3>
+        <p>sends emails</p>
+    </div>
+
+    <div class="cloudwatch-branch"></div>
+
+    <h2>Monitoring</h2>
+
+    <div class="service cloudwatch">
+        <h3>CloudWatch</h3>
+        <p>collects logs and metrics</p>
+    </div>
+
+</div>
 
 </section>
 
@@ -133,7 +139,7 @@
 
 <li>v1.2 - Contact API: finished (july 14th, 2026)</li>
 
-<li>v1.3 - Cloudwatch Monitoring: unfinished</li>
+<li>v1.3 - Cloudwatch Monitoring: finished (july 15th, 2026)</li>
 
 <li>v1.4 - CI/CD Pipeline: unfinished</li>
 

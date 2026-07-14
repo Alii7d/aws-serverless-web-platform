@@ -12,7 +12,7 @@
 - Unique visitor tracking using browser-generated UUIDs
 - Contact form using API Gateway, Lambda, and Amazon SES
 - API built with API Gateway
-
+- Monitoring through Amazon CloudWatch
 ## Architecture
 
 ```
@@ -28,8 +28,11 @@ API Gateway
 Visitor Counter Lambda      Contact Lambda
           |                      |
       DynamoDB              Amazon SES
-                                   |
-                              Email Inbox
+          \                      /
+           \                    /
+            \                  /
+             \                /
+              Amazon CloudWatch
 ```
 
 ## Tech stack
@@ -44,7 +47,7 @@ Visitor Counter Lambda      Contact Lambda
 - Amazon DynamoDB
 - Amazon SES
 - AWS IAM
-
+- Amazon Cloudwatch
 ## Roadmap
 
 - v1.0 - Static Hosting and Visitor Counter
@@ -64,6 +67,10 @@ The original design considered using IP addresses with SHA-256 hashing to preser
 ## Contact API
 
 Version 1.2 introduced a contact form that allows visitors to send messages directly from the website. the form validates user input before sending the message through API Gateway to lambda, where Amazon SES sends it directly to my email.
+
+## Cloudwatch Monitoring
+
+Version 1.3 introduced Cloudwatch for monitoring the application. both lambda functions automatically send logs and metrics to Cloudwatch making it easier to monitor requests, identify errors, and troubleshoot issues during development.
 
 ## Run locally
 
