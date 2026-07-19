@@ -24,7 +24,7 @@ jobs:
 
       - name: Upload website to S3
         run: |
-          aws s3 sync . s3://YOUR_BUCKET_NAME \
+          aws s3 sync . s3://teststudentali2 \
             --delete \
             --exclude ".git/*" \
             --exclude ".github/*" \
@@ -33,5 +33,5 @@ jobs:
       - name: Create CloudFront invalidation
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id YOUR_DISTRIBUTION_ID \
+            --distribution-id E1600G7RB7MC4S \
             --paths "/*"
