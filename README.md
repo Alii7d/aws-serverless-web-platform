@@ -48,6 +48,7 @@ Visitor Counter Lambda      Contact Lambda
 - Amazon SES
 - AWS IAM
 - Amazon Cloudwatch
+- GitHub Actions
 ## Roadmap
 
 - v1.0 - Static Hosting and Visitor Counter
@@ -71,6 +72,13 @@ Version 1.2 introduced a contact form that allows visitors to send messages dire
 ## Cloudwatch Monitoring
 
 Version 1.3 introduced Cloudwatch for monitoring the application. both lambda functions automatically send logs and metrics to Cloudwatch making it easier to monitor requests, identify errors, and troubleshoot issues during development.
+
+## Github Actions
+
+Version 1.4 introduced a continuous integration and deployment (CI/CD) pipeline using GitHub Actions. every push to the main branch now automatically uploads the latest website files to Amazon S3 and creates a CloudFront invalidation removing the need for manual deployments.
+
+This update provides a faster and more consistent deployment process.
+
 
 ## Run locally
 
